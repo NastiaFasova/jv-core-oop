@@ -15,20 +15,16 @@ public class Car {
     private CarWheel[]carWheels;
     private CarDoor[]carDoors;
 
-    public Car(LocalDate productionDate,
-               String engineType, long maxSpeed,
-               int accelerationTime, int passengerCapacity,
-               int passengerCount, int currentSpeed,
-               CarWheel[] carWheels, CarDoor[] carDoors) {
-        this.productionDate = productionDate;
-        this.engineType = engineType;
-        this.maxSpeed = maxSpeed;
-        this.accelerationTime = accelerationTime;
-        this.passengerCapacity = passengerCapacity;
-        this.passengerCount = passengerCount;
-        this.currentSpeed = currentSpeed;
-        this.carWheels = carWheels;
-        this.carDoors = carDoors;
+    private Car(CarBuilder carBuilder) {
+        this.productionDate = carBuilder.productionDate;
+        this.engineType = carBuilder.engineType;
+        this.maxSpeed = carBuilder.maxSpeed;
+        this.accelerationTime = carBuilder.accelerationTime;
+        this.passengerCapacity = carBuilder.passengerCapacity;
+        this.passengerCount = carBuilder.passengerCount;
+        this.currentSpeed = carBuilder.currentSpeed;
+        this.carWheels = carBuilder.carWheels;
+        this.carDoors = carBuilder.carDoors;
     }
 
     public Car(LocalDate productionDate, String engineType, long maxSpeed,
@@ -104,5 +100,52 @@ public class Car {
                 + ", carWheels=" + Arrays.toString(carWheels)
                 + ", carDoors=" + Arrays.toString(carDoors)
                 + "maxCurrentSpeed=" + carService.getMaxCurrentSpeed(this);
+    }
+
+    public static class CarBuilder {
+        private final LocalDate productionDate;
+        private final String engineType;
+        private final long maxSpeed;
+        private final int accelerationTime;
+        private final int passengerCapacity;
+        private int passengerCount;
+        private int currentSpeed;
+        private CarWheel[]carWheels;
+        private CarDoor[]carDoors;
+
+        public CarBuilder(LocalDate productionDate, String engineType,
+                          long maxSpeed, int accelerationTime, int passengerCapacity
+        ) {
+            this.productionDate = productionDate;
+            this.engineType = engineType;
+            this.maxSpeed = maxSpeed;
+            this.accelerationTime = accelerationTime;
+            this.passengerCapacity = passengerCapacity;
+
+        }
+
+        public CarBuilder setPassengerCount(int passengerCount) {
+            this.passengerCount = passengerCount;
+            return this;
+        }
+
+        public CarBuilder setCurrentSpeed(int currentSpeed) {
+            this.currentSpeed = currentSpeed;
+            return this;
+        }
+
+        public CarBuilder setCarWheels(CarWheel[] carWheels) {
+            this.carWheels = carWheels;
+            return this;
+        }
+
+        public CarBuilder setCarDoors(CarDoor[] carDoors) {
+            this.carDoors = carDoors;
+            return this;
+        }
+
+        public Car build() {
+            return new Car(this);
+        }
     }
 }
