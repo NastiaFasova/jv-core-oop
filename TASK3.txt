@@ -1,0 +1,38 @@
+TASK1
+SELECT city, MAX(grade) FROM customer GROUP BY city;
+
+
+TASK2
+SELECT customer_id, ord_date, MAX(purch_amt) AS purchase 
+FROM orders GROUP BY customer_id, ord_date ORDER BY
+ customer_id, ord_date, purchase DESC;
+
+
+SELECT ord_no, ord_date, MAX(purch_amt) FROM orders 
+GROUP BY purch_amt, ord_no HAVING purch_amt 
+BETWEEN 2000 AND 6000;
+
+
+TASK3
+SELECT c.cust_name, c.city, c.grade, s.name, s.commission
+ FROM customer c INNER JOIN salesman s ON
+ c.salesman_id = s.salesman_id AND s.commission > 0.12;
+
+
+SELECT c.cust_name, c.city, c.grade, s.name, s.commission
+ FROM customer c LEFT JOIN salesman s ON
+ c.salesman_id = s.salesman_id;
+
+
+SELECT c.cust_name, c.city, c.grade, s.name, s.commission
+ FROM customer c LEFT JOIN salesman s ON 
+c.salesman_id = s.salesman_id WHERE c.grade < 300;
+
+
+TASK4
+SELECT emp_department.dpt_name
+  FROM emp_details 
+     INNER JOIN emp_department
+       ON emp_dept =dpt_code
+        GROUP BY emp_department.dpt_name
+          HAVING COUNT(*) > 2;
