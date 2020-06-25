@@ -40,9 +40,13 @@ SELECT c.cust_name, c.city, c.grade, s.name, s.commission
 3)Write a SQL statement to make a list in ascending order for the customer who holds
  a grade less than 300 and works either through a salesman or by own.
 
-SELECT c.cust_name, c.city, c.grade, s.name, s.commission
- FROM customer c LEFT JOIN salesman s ON
-c.salesman_id = s.salesman_id WHERE c.grade < 300;
+SELECT a.cust_name, a.city, a.grade,
+b.name AS "Salesman", b.city
+FROM customer a
+LEFT OUTER JOIN salesman b
+ON a.salesman_id = b.salesman_id
+WHERE a.grade < 300
+ORDER BY a.customer_id;
 
 
 TASK4
