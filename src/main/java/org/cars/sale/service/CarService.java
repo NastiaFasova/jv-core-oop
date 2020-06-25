@@ -2,6 +2,7 @@ package org.cars.sale.service;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import org.cars.sale.dao.CarDao;
 import org.cars.sale.model.Car;
 import org.cars.sale.model.CarDoor;
 import org.cars.sale.model.CarWheel;
@@ -9,6 +10,7 @@ import org.cars.sale.model.CarWheel;
 public class CarService {
     private final Car car = new Car(LocalDate.of(2013, 9, 9),
             "Petrol", 180, 15, 4);
+    private final CarDao carDao = new CarDao();
 
     public int changeCurrentSpeed(Car car, int speed) {
         car.setCurrentSpeed(speed);
@@ -60,4 +62,7 @@ public class CarService {
         return mostErasedWheelCondition * car.getMaxSpeed();
     }
 
+    public Car add(Car car) {
+        return carDao.add(car);
+    }
 }

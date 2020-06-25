@@ -2,18 +2,36 @@ package org.cars.sale.model;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
+import javax.persistence.Table;
 import org.cars.sale.service.CarService;
 
+@Entity
+@Table(name = "car")
 public class Car {
-    private final LocalDate productionDate;
-    private final String engineType;
-    private final long maxSpeed;
-    private final int accelerationTime;
-    private final int passengerCapacity;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private LocalDate productionDate;
+    private String engineType;
+    private long maxSpeed;
+    private int accelerationTime;
+    private int passengerCapacity;
     private int passengerCount;
     private int currentSpeed;
-    private CarWheel[]carWheels;
-    private CarDoor[]carDoors;
+
+    @OneToMany
+    @OrderColumn(name = "car_wheels")
+    private CarWheel []carWheels;
+
+    @OneToMany
+    @OrderColumn(name = "car_doors")
+    private CarDoor []carDoors;
 
     private Car(CarBuilder carBuilder) {
         this.productionDate = carBuilder.productionDate;
@@ -34,6 +52,25 @@ public class Car {
         this.maxSpeed = maxSpeed;
         this.accelerationTime = accelerationTime;
         this.passengerCapacity = passengerCapacity;
+    }
+
+    public Car() {
+    }
+
+    public void setPassengerCount(int passengerCount) {
+        this.passengerCount = passengerCount;
+    }
+
+    public void setCarDoors(CarDoor[] carDoors) {
+        this.carDoors = carDoors;
+    }
+
+    public void setCarWheels(CarWheel[] carWheels) {
+        this.carWheels = carWheels;
+    }
+
+    public void setCurrentSpeed(int currentSpeed) {
+        this.currentSpeed = currentSpeed;
     }
 
     public LocalDate getProductionDate() {
@@ -72,22 +109,6 @@ public class Car {
         return carDoors;
     }
 
-    public void setPassengerCount(int passengerCount) {
-        this.passengerCount = passengerCount;
-    }
-
-    public void setCurrentSpeed(int currentSpeed) {
-        this.currentSpeed = currentSpeed;
-    }
-
-    public void setCarWheels(CarWheel[] carWheels) {
-        this.carWheels = carWheels;
-    }
-
-    public void setCarDoors(CarDoor[] carDoors) {
-        this.carDoors = carDoors;
-    }
-
     public String info() {
         CarService carService = new CarService();
         return "Information about Car:" + "productionDate=" + productionDate
@@ -103,11 +124,11 @@ public class Car {
     }
 
     public static class CarBuilder {
-        private final LocalDate productionDate;
-        private final String engineType;
-        private final long maxSpeed;
-        private final int accelerationTime;
-        private final int passengerCapacity;
+        private LocalDate productionDate;
+        private String engineType;
+        private long maxSpeed;
+        private int accelerationTime;
+        private int passengerCapacity;
         private int passengerCount;
         private int currentSpeed;
         private CarWheel[]carWheels;
@@ -122,6 +143,9 @@ public class Car {
             this.accelerationTime = accelerationTime;
             this.passengerCapacity = passengerCapacity;
 
+        }
+
+        public CarBuilder() {
         }
 
         public CarBuilder setPassengerCount(int passengerCount) {
