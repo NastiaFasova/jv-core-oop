@@ -1,8 +1,11 @@
 package org.cars.sale.service;
 
+import org.cars.sale.dao.CarDoorDao;
 import org.cars.sale.model.CarDoor;
 
 public class CarDoorService {
+
+    private final CarDoorDao carDoorDao = new CarDoorDao();
 
     public boolean openDoor(CarDoor door) {
         door.setDoorOpened(true);
@@ -30,5 +33,9 @@ public class CarDoorService {
     public boolean closeDoor(CarDoor door) {
         door.setDoorOpened(false);
         return true;
+    }
+
+    public CarDoor add(CarDoor carDoor) {
+        return carDoorDao.add(carDoor);
     }
 }
