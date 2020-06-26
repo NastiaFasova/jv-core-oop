@@ -19,8 +19,8 @@ public class Main {
         WheelService wheelService = new WheelService();
         wheelService.add(carWheel);
 
-        CarDoor []carDoors = {carDoor};
-        CarWheel []carWheels = {carWheel};
+        CarDoor[] carDoors = {carDoor};
+        CarWheel[] carWheels = {carWheel};
         Car car = new Car.CarBuilder()
                 .setCarDoors(carDoors)
                 .setCarWheels(carWheels)
