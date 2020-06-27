@@ -1,41 +1,24 @@
 package org.cars.sale.service;
 
-import org.cars.sale.dao.CarDoorDao;
+import java.util.List;
 import org.cars.sale.model.CarDoor;
 
-public class CarDoorService {
+public interface CarDoorService {
+    boolean openDoor(CarDoor door);
 
-    private final CarDoorDao carDoorDao = new CarDoorDao();
+    boolean openWindow(CarDoor door);
 
-    public boolean openDoor(CarDoor door) {
-        door.setDoorOpened(true);
-        return true;
-    }
+    boolean openOrCloseWindow(CarDoor window);
 
-    public boolean openWindow(CarDoor door) {
-        door.setWindowOpened(true);
-        return true;
-    }
+    boolean openOrCloseDoor(CarDoor door);
 
-    public boolean openOrCloseWindow(CarDoor window) {
-        return window.isWindowOpened() ? closeWindow(window) : openWindow(window);
-    }
+    boolean closeWindow(CarDoor window);
 
-    public boolean openOrCloseDoor(CarDoor door) {
-        return door.isDoorOpened() ? closeDoor(door) : openDoor(door);
-    }
+    boolean closeDoor(CarDoor door);
 
-    public boolean closeWindow(CarDoor window) {
-        window.setWindowOpened(false);
-        return true;
-    }
+    CarDoor add(CarDoor carDoor);
 
-    public boolean closeDoor(CarDoor door) {
-        door.setDoorOpened(false);
-        return true;
-    }
+    CarDoor getById(Long id);
 
-    public CarDoor add(CarDoor carDoor) {
-        return carDoorDao.add(carDoor);
-    }
+    List<CarDoor> getAll();
 }

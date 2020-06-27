@@ -1,14 +1,29 @@
 package org.cars.sale;
 
+import org.cars.sale.dao.CarDoorDao;
+import org.cars.sale.dao.impl.CarDoorDaoImpl;
 import org.cars.sale.model.CarDoor;
 import org.cars.sale.service.CarDoorService;
+import org.cars.sale.service.impl.CarDoorServiceImpl;
+import org.hibernate.SessionFactory;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
+@RunWith(MockitoJUnitRunner.class)
 public class CarDoorTest {
-    private final CarDoorService carDoorService = new CarDoorService();
     private final CarDoor carDoor = new CarDoor();
+    @Mock
+    private SessionFactory sessionFactory;
 
+    @Mock
+    private CarDoorDaoImpl carDoorDao;
+
+    @InjectMocks
+    private CarDoorServiceImpl carDoorService;
 
     @Test
     public void openDoorCheck() {

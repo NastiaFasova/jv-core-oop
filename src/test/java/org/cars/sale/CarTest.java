@@ -1,20 +1,41 @@
 package org.cars.sale;
 
+import org.cars.sale.dao.CarDao;
+import org.cars.sale.dao.impl.CarDaoImpl;
+import org.cars.sale.dao.impl.CarDoorDaoImpl;
 import org.cars.sale.model.Car;
 import org.cars.sale.model.CarDoor;
 import org.cars.sale.model.CarWheel;
 import org.cars.sale.service.CarService;
+import org.cars.sale.service.impl.CarDoorServiceImpl;
+import org.cars.sale.service.impl.CarServiceImpl;
+import org.hibernate.SessionFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.time.LocalDate;
 
+@RunWith(MockitoJUnitRunner.class)
 public class CarTest {
     private Car car = new Car(LocalDate.of(2013, 9, 9),
             "Petrol", 180, 15, 4);
     private static final double DELTA = 1e-15;
-    private CarService carService = new CarService();
+
+    @Mock
+    private SessionFactory sessionFactory;
+
+    @Mock
+    private CarDaoImpl carDao;
+
+    @InjectMocks
+    private CarServiceImpl carService;
+
+
     @Before
     public void setUp() {
         CarWheel carWheel = new CarWheel();
@@ -50,7 +71,7 @@ public class CarTest {
     }
 
     @Test
-    public void getDoorBuIndexCheck() {
+    public void getDoorByIndexCheck() {
         CarDoor carDoor = new CarDoor();
         CarDoor []carDoors = {carDoor};
         car.setCarDoors(carDoors);
@@ -70,7 +91,7 @@ public class CarTest {
     }
 
     @Test
-    public void getWheelBuIndexCheck() {
+    public void getWheelByIndexCheck() {
         CarWheel carWheel = new CarWheel();
         CarWheel []carWheels = {carWheel};
         car.setCarWheels(carWheels);
@@ -100,7 +121,7 @@ public class CarTest {
         CarWheel firstCarWheel = new CarWheel();
         CarWheel secondCarWheel = new CarWheel();
         CarWheel []additionalCarWheels = {firstCarWheel, secondCarWheel};
-        carService.addWheels(additionalCarWheels,2, car);
+        carService.addWheels(additionalCarWheels, car);
         Assert.assertEquals(3, car.getCarWheels().length);
     }
 

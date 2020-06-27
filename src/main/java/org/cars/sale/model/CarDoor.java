@@ -20,6 +20,14 @@ public class CarDoor {
                 + doorOpened + ", windowOpened=" + windowOpened;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public boolean isDoorOpened() {
         return doorOpened;
     }

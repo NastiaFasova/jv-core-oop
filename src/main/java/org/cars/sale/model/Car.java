@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
-import org.cars.sale.service.CarService;
 
 @Entity
 @Table(name = "car")
@@ -55,6 +54,38 @@ public class Car {
     }
 
     public Car() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setProductionDate(LocalDate productionDate) {
+        this.productionDate = productionDate;
+    }
+
+    public void setEngineType(String engineType) {
+        this.engineType = engineType;
+    }
+
+    public void setMaxSpeed(long maxSpeed) {
+        this.maxSpeed = maxSpeed;
+    }
+
+    public void setAccelerationTime(int accelerationTime) {
+        this.accelerationTime = accelerationTime;
+    }
+
+    public void setPassengerCapacity(int passengerCapacity) {
+        this.passengerCapacity = passengerCapacity;
+    }
+
+    public CarDoor[] getCarDoors() {
+        return carDoors;
     }
 
     public void setPassengerCount(int passengerCount) {
@@ -110,7 +141,6 @@ public class Car {
     }
 
     public String info() {
-        CarService carService = new CarService();
         return "Information about Car:" + "productionDate=" + productionDate
                 + ", engineType='" + engineType + '\''
                 + ", maxSpeed=" + maxSpeed
@@ -119,8 +149,7 @@ public class Car {
                 + ", passengerCount=" + passengerCount
                 + ", currentSpeed=" + currentSpeed
                 + ", carWheels=" + Arrays.toString(carWheels)
-                + ", carDoors=" + Arrays.toString(carDoors)
-                + "maxCurrentSpeed=" + carService.getMaxCurrentSpeed(this);
+                + ", carDoors=" + Arrays.toString(carDoors);
     }
 
     public static class CarBuilder {
