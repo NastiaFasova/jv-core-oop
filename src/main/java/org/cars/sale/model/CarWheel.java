@@ -23,6 +23,14 @@ public class CarWheel {
                 + "wheelCondition=" + wheelCondition;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setWheelCondition(double wheelCondition) {
         this.wheelCondition = wheelCondition;
     }
