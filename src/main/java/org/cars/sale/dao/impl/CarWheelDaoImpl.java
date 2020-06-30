@@ -33,7 +33,7 @@ public class CarWheelDaoImpl implements CarWheelDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Transaction failed");
+            throw new RuntimeException("Transaction failed. CarWheel wasn't added into DB", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -55,7 +55,8 @@ public class CarWheelDaoImpl implements CarWheelDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Transaction failed");
+            throw new RuntimeException("Transaction failed."
+                    + " We can't get the carWheel by its ID", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -71,7 +72,7 @@ public class CarWheelDaoImpl implements CarWheelDao {
             Query<CarWheel> query = session.createQuery("from CarWheel", CarWheel.class);
             return query.list();
         } catch (Exception e) {
-            throw new RuntimeException("Error retrieving all carWheel", e);
+            throw new RuntimeException("Error retrieving all carWheels", e);
         } finally {
             if (session != null) {
                 session.close();

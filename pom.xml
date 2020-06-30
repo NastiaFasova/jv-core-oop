@@ -129,7 +129,6 @@
             <version>6.1.25</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <groupId>org.example</groupId>

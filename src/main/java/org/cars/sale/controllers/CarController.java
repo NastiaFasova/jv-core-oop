@@ -37,12 +37,12 @@ public class CarController {
         this.wheelService = wheelService;
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public void add(@RequestBody @Valid CarRequestDto carRequestDto) {
         carService.add(carMapper.getCarFromRequest(carRequestDto));
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<CarResponseDto> getAll() {
         List<Car> cars = carService.getAll();
         return cars.stream()

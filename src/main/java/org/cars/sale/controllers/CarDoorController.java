@@ -24,12 +24,12 @@ public class CarDoorController {
         this.carDoorMapper = carDoorMapper;
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public void add(@RequestBody @Valid CarDoorDto carDoorDto) {
         carDoorService.add(carDoorMapper.getCarDoor(carDoorDto));
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<CarDoorDto> getAll() {
         List<CarDoor> carDoors = carDoorService.getAll();
         return carDoors.stream()

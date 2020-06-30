@@ -33,7 +33,7 @@ public class CarDoorDaoImpl implements CarDoorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Transaction failed");
+            throw new RuntimeException("Transaction failed. CarDoor wasn't added into DB", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -55,7 +55,7 @@ public class CarDoorDaoImpl implements CarDoorDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Transaction failed");
+            throw new RuntimeException("Transaction failed. We can't get the carDoor by its ID", e);
         } finally {
             if (session != null) {
                 session.close();
