@@ -16,11 +16,8 @@ public class CarRequestDto {
     private LocalDate productionDate;
     @NotNull(message = "engineType of car can't be null")
     private String engineType;
-    @NotNull(message = "maxSpeed of car can't be zero")
     private long maxSpeed;
-    @NotNull(message = "accelerationTime of car can't be zero")
     private int accelerationTime;
-    @NotNull(message = "passengerCapacity of car can't be zero")
     private int passengerCapacity;
     @NotNull
     private long[] carWheels;

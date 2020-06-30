@@ -5,7 +5,6 @@ import javax.validation.constraints.NotNull;
 public class CarDoorDto {
     @NotNull(message = "CarDoorId can't be null")
     private Long id;
-    @NotNull(message = "Door should be either opened or closed")
     private boolean doorOpened;
 
     public Long getId() {
